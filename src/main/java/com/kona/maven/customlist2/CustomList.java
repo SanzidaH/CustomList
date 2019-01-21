@@ -100,6 +100,7 @@ public class CustomList<T> {
 
 		return genericObject[index];
 	}
+	
 
 	public void clear() {
 
@@ -119,27 +120,32 @@ public class CustomList<T> {
 		
 		else {
 		
-			int additionalCapacity=0, intObjCount = objCount;
-			if(INITIAL_ARRAY_LENGTH ==3 && objCount<3) {
-				additionalCapacity = objCount - INITIAL_ARRAY_LENGTH;
-			}
-			else 
-				additionalCapacity = 0;
+			int additionalCapacity = 0, initObjCount = this.objCount;
+//			if(INITIAL_ARRAY_LENGTH ==3 && objCount<3) {
+//				additionalCapacity = INITIAL_ARRAY_LENGTH - objCount;
+//			}
+//			else 
+//				additionalCapacity = 0;
 			
+			System.out.println("objCount: "+objCount);
 			objCount = objCount + addlist.size();
-			T[] newGenericObject = (T[]) new Object[objCount];
-			INITIAL_ARRAY_LENGTH = INITIAL_ARRAY_LENGTH + addlist.size() - additionalCapacity;
+			System.out.println("objCount: "+objCount);
 			
-			int temp = 0;
-			for(int k=intObjCount; k<objCount; k++) {
+			T[] newGenericObject = (T[]) new Object[objCount];
+//			INITIAL_ARRAY_LENGTH = INITIAL_ARRAY_LENGTH + addlist.size() - additionalCapacity;
+			INITIAL_ARRAY_LENGTH = objCount;		
+			
+			for(int j = 0; j < initObjCount; j++) {
+				newGenericObject[j] = genericObject[j];
+			}
+			
+            int temp = 0;
+			for(int k=initObjCount; k<objCount; k++) {
 				newGenericObject[k] = addlist.get(temp);
 				temp++;
 			}
 
-			for(int j=0; j<intObjCount; j++) {
-				newGenericObject[j] = addlist.get(j);
-				temp++;
-			}
+
 			
 			genericObject = newGenericObject;
 			
